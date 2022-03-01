@@ -1,4 +1,29 @@
 import { createApp } from 'vue'
-import App from './App.vue'
+import App from './App.vue';
+import routes from './routes'
+import { createStore } from 'vuex'
 
-createApp(App).mount('#app')
+// Create a new store instance.
+const store = createStore({
+  state () {
+    return {
+      count: 0
+    }
+  },
+  mutations: {
+    increment (state) {
+      state.count++
+    },
+    decrement (state) {
+        state.count--
+    },
+    incrementBy (state, payload) {
+        state.count += payload
+    }, 
+    decrementBy (state, payload) {
+        state.count -= payload
+    },
+  }
+})
+
+createApp(App).use(store).use(routes).mount('#app')
